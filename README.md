@@ -25,14 +25,14 @@ python main.py
 
 Follow the on-screen prompts to navigate through the application menu for various operations like adding players, creating tournaments, and viewing standings.
 
-Generating Flake8 HTML Report
+# Generating Flake8 HTML Report
 Flake8 is a tool to check the style and quality of Python code. To generate an HTML report using Flake8:
 
-Installation
+# Installation
 Ensure you have Flake8 and flake8-html installed. If not, you can install them using pip:
 pip install flake8 flake8-html
 
-Generate Report
+# Generate Report
 Run the following command to analyze your project and generate an HTML report:
 flake8 --format=html --htmldir=flake8-report
 
