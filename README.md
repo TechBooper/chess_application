@@ -29,6 +29,7 @@ Usage
 After starting the application, you will be presented with the following options in the main menu. Here is a brief explanation of each:
 
 Main Menu Options
+
 1 - Add Player
 Prompts you to enter player information (name, chess ID...). This option registers a new player into the system.
 
