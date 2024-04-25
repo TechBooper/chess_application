@@ -98,53 +98,30 @@ class TournamentController:
             self.tournament_view.prompt_for_scores()
         )
 
-        if player1_score_input == "draw" and player2_score_input == "draw":
-            player1_score = player2_score = 0.5
-            player1_id, player2_id = self.tournament_model.get_player_ids_for_match(
-                tournament_name, round_number, match_index
-            )
-            self.tournament_model.update_scores(tournament_name, player1_id, draw=True)
-            self.tournament_model.update_scores(tournament_name, player2_id, draw=True)
-            self.tournament_view.display_message(
-                "The match ended in a draw. Everyone gets 0.5 points."
-            )
-        else:
-            try:
+        try:
+            if (
+                player1_score_input.lower() == "draw"
+                and player2_score_input.lower() == "draw"
+            ):
+                player1_score = player2_score = 0.5
+            else:
                 player1_score = float(player1_score_input)
                 player2_score = float(player2_score_input)
-                if player1_score > player2_score:
-                    winner_id, loser_id = (
-                        self.tournament_model.get_player_ids_for_match(
-                            tournament_name, round_number, match_index
-                        )
-                    )
-                    self.tournament_model.update_scores(
-                        tournament_name, winner_id, win=True
-                    )
-                    self.tournament_model.update_scores(
-                        tournament_name, loser_id, win=False
-                    )
-                    self.tournament_view.display_message(f"Winner is {winner_id}.")
-                elif player2_score > player1_score:
-                    loser_id, winner_id = (
-                        self.tournament_model.get_player_ids_for_match(
-                            tournament_name, round_number, match_index
-                        )
-                    )
-                    self.tournament_model.update_scores(
-                        tournament_name, winner_id, win=True
-                    )
-                    self.tournament_model.update_scores(
-                        tournament_name, loser_id, win=False
-                    )
-                    self.tournament_view.display_message(f"Winner is {winner_id}.")
-            except ValueError:
-                self.tournament_view.display_error(
-                    "Invalid input for scores. Please enter numeric values or 'draw'."
-                )
 
-        self.tournament_model.save_tournaments()
-        self.tournament_view.display_success("Match result updated successfully.")
+            success = self.tournament_model.update_scores(
+                tournament_name, round_number, match_index, player1_score, player2_score
+            )
+
+            if success:
+                self.tournament_view.display_success(
+                    "Match result updated successfully."
+                )
+            else:
+                self.tournament_view.display_error("Failed to update match results.")
+        except ValueError:
+            self.tournament_view.display_error(
+                "Invalid input for scores. Enter numeric values or 'draw' for both players if it is draw."
+            )
 
     def view_current_standings(self, tournament_name: str):
         standings = self.tournament_model.get_current_standings(tournament_name)
