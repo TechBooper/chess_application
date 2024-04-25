@@ -84,6 +84,7 @@ class TournamentModel:
             print("All rounds have been completed.")
             return False
 
+        # Set end time for the previous round
         if tournament.current_round > 0:
             previous_round = tournament.rounds[tournament.current_round - 1]
             if previous_round.end_time is None:
@@ -121,7 +122,7 @@ class TournamentModel:
                     paired.add(sorted_players[j])
                     break
 
-        # Create matches
+        # Create matches for the new round
         matches = [([p1, 0], [p2, 0]) for p1, p2 in new_pairs]
         new_round = Round(
             round_number=len(tournament.rounds) + 1,
@@ -204,28 +205,29 @@ class TournamentModel:
         self, tournament_name, round_number, match_index, player1_score, player2_score
     ):
         tournament = self.find_tournament_by_name(tournament_name)
-        if tournament is None:
+        if not tournament:
             print(f"Tournament {tournament_name} not found.")
             return False
 
         try:
-
             match = tournament.rounds[round_number - 1].matches[match_index]
             player1_id, player2_id = match[0][0], match[1][0]
 
             match[0][1] = player1_score
             match[1][1] = player2_score
 
-            self.update_individual_score(tournament, player1_id, player1_score)
-            self.update_individual_score(tournament, player2_id, player2_score)
+            tournament.scores[player1_id] = (
+                tournament.scores.get(player1_id, 0) + player1_score
+            )
+            tournament.scores[player2_id] = (
+                tournament.scores.get(player2_id, 0) + player2_score
+            )
 
             if all(
                 m[0][1] is not None and m[1][1] is not None
                 for m in tournament.rounds[round_number - 1].matches
             ):
-                tournament.rounds[round_number - 1].end_time = (
-                    datetime.now().isoformat()
-                )
+                tournament.rounds[round_number - 1].end_time = datetime.now()
 
             self.save_tournaments()
             return True
