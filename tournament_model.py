@@ -84,7 +84,6 @@ class TournamentModel:
             print("All rounds have been completed.")
             return False
 
-        # Set end time for the previous round
         if tournament.current_round > 0:
             previous_round = tournament.rounds[tournament.current_round - 1]
             if previous_round.end_time is None:
@@ -122,7 +121,7 @@ class TournamentModel:
                     paired.add(sorted_players[j])
                     break
 
-        # Create matches for the new round
+        # Create matches
         matches = [([p1, 0], [p2, 0]) for p1, p2 in new_pairs]
         new_round = Round(
             round_number=len(tournament.rounds) + 1,
