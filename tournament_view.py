@@ -33,7 +33,7 @@ class TournamentView:
         print(f"Success: {message}")
 
     def display_message(self, message):
-        print(f"Success: {message}")
+        print(message)
 
     def prompt_for_match_index(self):
         """Prompt the user for the match index and return it."""
@@ -45,21 +45,6 @@ class TournamentView:
 
     def get_winner(self):
         return input("Enter the winner (Player 1 ID, Player 2 ID, or 'draw'): ")
-
-    def get_new_tournament_data(self):
-        print("\nCreate a New Tournament")
-        name = input("Tournament name: ")
-        location = input("Location: ")
-        start_date = input("Start date (YYYY-MM-DD): ")
-        end_date = input("End date (YYYY-MM-DD): ")
-        rounds = input("Number of rounds (default is 4): ") or 4
-        return {
-            "name": name,
-            "location": location,
-            "start_date": start_date,
-            "end_date": end_date,
-            "rounds": int(rounds),
-        }
 
     def display_matches(self, matches):
         print("\nMatches:")
@@ -104,7 +89,8 @@ class TournamentView:
             print("\nList of All Tournaments:")
             for tournament in tournaments:
                 print(
-                    f"- {tournament.name}at{tournament.location}from{tournament.start_date}to{tournament.end_date}"
+                    f"-{tournament.name} at {tournament.location} "
+                    f"from {tournament.start_date} to {tournament.end_date}"
                 )
         else:
             print("No tournaments available.")
