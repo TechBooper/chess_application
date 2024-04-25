@@ -1,0 +1,50 @@
+[
+    {
+        "first_name": "John",
+        "last_name": "Homie",
+        "date_of_birth": "2001-12-18",
+        "chess_id": "AB1512"
+    },
+    {
+        "first_name": "ABI",
+        "last_name": "ABOU",
+        "date_of_birth": "2001-12-18",
+        "chess_id": "AB1515"
+    },
+    {
+        "first_name": "John",
+        "last_name": "Last",
+        "date_of_birth": "2001-10-12",
+        "chess_id": "AB1514"
+    },
+    {
+        "first_name": "JOHN",
+        "last_name": "DOE",
+        "date_of_birth": "D",
+        "chess_id": "D"
+    },
+    {
+        "first_name": "John",
+        "last_name": "Doe",
+        "date_of_birth": "2001-12-12",
+        "chess_id": "AB1612"
+    },
+    {
+        "first_name": "JOHN",
+        "last_name": "BARRY",
+        "date_of_birth": "2001-12-12",
+        "chess_id": "AB15151"
+    },
+    {
+        "first_name": "Leon",
+        "last_name": "Leon",
+        "date_of_birth": "2001-12-12",
+        "chess_id": "AB15151"
+    },
+    {
+        "first_name": "John",
+        "last_name": "Davis",
+        "date_of_birth": "2001-12-12",
+        "chess_id": "AB20041"
+    }
+]
