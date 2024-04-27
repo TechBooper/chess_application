@@ -1,3 +1,5 @@
+import os
+
 from controllers.player_controller import PlayerController
 from controllers.tournament_controller import TournamentController
 from models.player_model import PlayerModel
@@ -5,8 +7,10 @@ from models.tournament_model import TournamentModel
 from views.tournament_view import TournamentView
 from views.player_view import PlayerView
 
-file_path = r"c:/Users/Marwane/Documents/Main/main_4/data/tournaments.json"
-player_file_path = "c:/Users/Marwane/Documents/Main/main_4/data/players.json"
+base_dir = os.path.dirname(os.path.abspath(__file__))
+
+player_file_path = os.path.join(base_dir, "data", "players.json")
+file_path = os.path.join(base_dir, "data", "tournaments.json")
 
 player_model = PlayerModel(player_file_path)
 tournament_model = TournamentModel(file_path, player_model)
